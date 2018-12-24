@@ -7,6 +7,9 @@ set -e
 # will be honored
 /usr/local/bin/docker-entrypoint.sh rabbitmq-server -detached
 
+# Enable MQTT
+rabbitmq-plugins enable rabbitmq_mqtt
+
 # Do the cluster dance
 rabbitmqctl stop_app
 rabbitmqctl join_cluster rabbit@rabbitmq1
