@@ -32,11 +32,12 @@ services:
     volumes:
       - ./cluster-entrypoint.sh:/usr/local/bin/cluster-entrypoint.sh
     entrypoint: /usr/local/bin/cluster-entrypoint.sh
-    
+
   haproxy:
     image: haproxy:1.7
     volumes:
       - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+      - ../ssl/ssl.pem:/srv/ssl/ssl.pem
     depends_on:
       - rabbitmq1
       - rabbitmq2
@@ -44,3 +45,4 @@ services:
     ports:
       - 15672:15672
       - 5672:5672
+      - 1883:1883
